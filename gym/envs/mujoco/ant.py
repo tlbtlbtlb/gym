@@ -26,7 +26,8 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             reward_forward=forward_reward,
             reward_ctrl=-ctrl_cost,
             reward_contact=-contact_cost,
-            reward_survive=survive_reward)
+            reward_survive=survive_reward,
+            qpos = self.model.data.qpos.flat)
 
     def _get_obs(self):
         return np.concatenate([
