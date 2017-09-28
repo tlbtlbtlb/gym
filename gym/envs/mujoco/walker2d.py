@@ -19,7 +19,9 @@ class Walker2dEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         done = not (height > 0.8 and height < 2.0 and
                     ang > -1.0 and ang < 1.0)
         ob = self._get_obs()
-        return ob, reward, done, dict(qpos=self.model.data.qpos.flat)
+        return ob, reward, done, dict(
+            qpos=self.model.data.qpos.flat,
+            qvel=self.model.data.qvel.flat)
 
     def _get_obs(self):
         qpos = self.model.data.qpos

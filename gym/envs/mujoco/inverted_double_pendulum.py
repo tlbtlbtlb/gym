@@ -18,7 +18,9 @@ class InvertedDoublePendulumEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         alive_bonus = 10
         r = (alive_bonus - dist_penalty - vel_penalty)[0]
         done = bool(y <= 1)
-        return ob, r, done, dict(qpos=self.model.data.qpos.flat)
+        return ob, r, done, dict(
+            qpos=self.model.data.qpos.flat,
+            qvel=self.model.data.qvel.flat)
 
     def _get_obs(self):
         return np.concatenate([

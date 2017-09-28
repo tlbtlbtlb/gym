@@ -16,7 +16,11 @@ class SwimmerEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         reward_ctrl = - ctrl_cost_coeff * np.square(a).sum()
         reward = reward_fwd + reward_ctrl
         ob = self._get_obs()
-        return ob, reward, False, dict(reward_fwd=reward_fwd, reward_ctrl=reward_ctrl, qpos=self.model.data.qpos.flat)
+        return ob, reward, False, dict(
+            reward_fwd=reward_fwd,
+            reward_ctrl=reward_ctrl,
+            qpos=self.model.data.qpos.flat,
+            qvel=self.model.data.qvel.flat)
 
     def _get_obs(self):
         qpos = self.model.data.qpos
